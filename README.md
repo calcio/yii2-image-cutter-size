@@ -14,9 +14,9 @@ This is a fork [mtrim//yii2-image-cutter](https://github.com/mitrm/yii2-image-cu
 
 The preferred way to install this extension is through [Composer](http://getcomposer.org/).
 
-Either run ```php composer.phar require --prefer-dist mitrm/yii2-image-cutter "dev-master"```
+Either run ```php composer.phar require --prefer-dist calcio/yii2-image-cutter "dev-master"```
 
-or add ```"mitrm/yii2-image-cutter": "dev-master"``` to the require section of your ```composer.json```
+or add ```"calcio/yii2-image-cutter": "dev-master"``` to the require section of your ```composer.json```
 
 ### Use
 
