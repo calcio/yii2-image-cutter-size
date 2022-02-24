@@ -1,11 +1,12 @@
 # Yii2 image cutter
 
-This is a fork [mtrim//yii2-image-cutter](mitrm/yii2-image-cutter-size)
+This is a fork [mtrim//yii2-image-cutter](https://github.com/mitrm/yii2-image-cutter-size)
 
 #### Features:
 - Upload image
 - Crop image
 - Use Imagine
+- Bootstrap5
 
 ![cutter](https://cloud.githubusercontent.com/assets/9282021/8411519/fd601b0e-1e8c-11e5-83a5-1f8c4195f562.jpg)
 
