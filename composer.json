@@ -1,5 +1,5 @@
 {
-  "name": "mitrm/yii2-image-cutter",
+  "name": "calcio/yii2-image-cutter",
   "description": "Yii2 crop image widget",
   "version": "1.0.0",
   "type": "yii2-extension",
