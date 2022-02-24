@@ -1,6 +1,6 @@
 <?php
 
-namespace mitrm\cutter;
+namespace calcio\cutter;
 
 use Yii;
 use yii\helpers\Html;

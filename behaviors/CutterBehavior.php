@@ -1,6 +1,6 @@
 <?php
 
-namespace mitrm\cutter\behaviors;
+namespace calcio\cutter\behaviors;
 
 use Yii;
 use yii\helpers\Json;
