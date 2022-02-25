@@ -83,7 +83,6 @@ class Cutter extends \yii\widgets\InputWidget
         ]);
 
         Modal::begin([
-            'header' => Html::tag('h4', Yii::t('calcio/cutter/cutter', 'CUTTER')),
             'closeButton' => [],
             'footer' => $this->getModalFooter($inputField),
             'size' => Modal::SIZE_LARGE,
