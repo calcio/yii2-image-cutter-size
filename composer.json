@@ -3,6 +3,7 @@
   "description": "Yii2 crop image widget with Bootstrap 5",
   "version": "1.0.0",
   "type": "yii2-extension",
+  "license": "BSD-3-Clause",
   "keywords": [
     "yii2",
     "cutter",
