@@ -23,7 +23,7 @@ or add ```"calcio/yii2-image-cutter": "dev-master"``` to the require section of 
 * Add to the model behavior
 
 ```php
-    use mitrm\cutter\behaviors\CutterBehavior;
+    use calcio\cutter\behaviors\CutterBehavior;
 
     public function behaviors()
     {
@@ -57,7 +57,7 @@ or add ```"calcio/yii2-image-cutter": "dev-master"``` to the require section of 
 ```php
     <div class="form-group">
         <label class="control-label">Image</label>
-        <?= \mitrm\cutter\Cutter::widget([
+        <?= \calcio\cutter\Cutter::widget([
             'model' => $model,
             'attribute' => 'image'
         ]); ?>
@@ -69,7 +69,7 @@ or
 > With client validation
 
 ```php
-    <?= $form->field($model, 'image')->widget(\mitrm\cutter\Cutter::className(), [
+    <?= $form->field($model, 'image')->widget(\calcio\cutter\Cutter::className(), [
         //options
     ]); ?>
 ```
