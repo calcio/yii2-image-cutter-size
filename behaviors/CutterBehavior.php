@@ -68,7 +68,7 @@ class CutterBehavior extends \yii\behaviors\AttributeBehavior
 
     public function upload($attribute)
     {
-        if ($uploadImage = UploadedFile::getInstance($this->owner, $attribute) ) {
+        if ($uploadImage = UploadedFile::getInstance($this->owner, $attribute)) {
             if (!$this->owner->isNewRecord) {
                 $this->delete($attribute);
             }
@@ -89,7 +89,7 @@ class CutterBehavior extends \yii\behaviors\AttributeBehavior
             }
 
             $croppingFile = $croppingFilePath . DIRECTORY_SEPARATOR . $croppingFileName . $croppingFileExt;
-            if(!empty($uploadImage->tempName)) {
+            if (!empty($uploadImage->tempName)) {
                 $imageTmp = Image::getImagine()->open($uploadImage->tempName);
                 $imageTmp->rotate($cropping['dataRotate']);
 
@@ -128,67 +128,67 @@ class CutterBehavior extends \yii\behaviors\AttributeBehavior
     public function delete($attribute)
     {
         $name_image = $this->owner->oldAttributes[$attribute];
-        if(!empty($name_image)) {
+        if (!empty($name_image)) {
             $mack = Yii::getAlias($this->basePath) . DIRECTORY_SEPARATOR . $name_image . '*';
             @array_map("unlink", glob($mack));
         }
     }
 
     /**
-     * @brief Отдает оригинал загруженного изображения
+     * @brief Returns the original of the uploaded image
      * @return string
      */
-    public function getImgOrigin($attribute=false)
+    public function getImgOrigin($attribute = false)
     {
-        if(!is_array($this->attributes)) {
+        if (!is_array($this->attributes)) {
             $attribute = $this->attributes;
         }
-        return $this->baseDir.'/'.$this->owner->$attribute.$this->expansion;
+        return $this->baseDir . '/' . $this->owner->$attribute . $this->expansion;
     }
 
     /**
-     * @brief Отдает изображение под нужный размер
-     * @detailed смотри self::getImg()
+     * @brief Gives the image the right size 
+     * @detailed Look self::getImg()
      * @param int $size
      * @return bool|string
      */
-    public function getImg($size=500, $attribute=false)
+    public function getImg($size = 500, $attribute = false)
     {
-        if(!is_array($this->attributes)) {
+        if (!is_array($this->attributes)) {
             $attribute = $this->attributes;
         }
         return self::getImgUrl($this->owner->$attribute, $size);
     }
 
     /**
-     * @brief Отдает изображение под нужный размер
-     * @detailed если изображения нет под нужный размер, генерирует его в реальном времени
+     * @brief Gives the image the right size 
+     * @detailed if the image does not fit the desired size, it generates it in real time 
      * @param $img
      * @param int $size
      * @return bool|string
      */
-    public function getImgUrl($img, $size=500)
+    public function getImgUrl($img, $size = 500)
     {
-        $image = $this->baseDir.'/'.$img.'_'.$size.'x'.$size.$this->expansion;
-        $image_path = $this->basePath.'/'.$img.'_'.$size.'x'.$size.$this->expansion;
-        if(file_exists($image_path)) {
+        $image = $this->baseDir . '/' . $img . '_' . $size . 'x' . $size . $this->expansion;
+        $image_path = $this->basePath . '/' . $img . '_' . $size . 'x' . $size . $this->expansion;
+        if (file_exists($image_path)) {
             return $image;
         } else {
-            $file = $this->basePath.'/'.$img.$this->expansion;
-            if(!file_exists($file)) {
+            $file = $this->basePath . '/' . $img . $this->expansion;
+            if (!file_exists($file)) {
                 return false;
             }
             $image = new ImageDriver(['driver' => 'GD']);
             $image = $image->load($file);
-            $image->resize($size,$size);
-            $image->save($this->basePath.'/'.$img.'_'.$size.'x'.$size.$this->expansion, 100);
-            return $this->baseDir.'/'.$img.'_'.$size.'x'.$size.$this->expansion;
+            $image->resize($size, $size);
+            $image->save($this->basePath . '/' . $img . '_' . $size . 'x' . $size . $this->expansion, 100);
+            return $this->baseDir . '/' . $img . '_' . $size . 'x' . $size . $this->expansion;
         }
     }
 
     /**
-     * @brief Отдает изображение под нужный размер
-     * @detailed если изображения нет под нужный размер, генерирует его в реальном времени
+     * @brief Gives the image the right size 
+     * @detailed if the image does not fit the desired size, it generates it in real time 
      * @param $basePath
      * @param $baseDir
      * @param $img
@@ -196,23 +196,22 @@ class CutterBehavior extends \yii\behaviors\AttributeBehavior
      * @param $expansion
      * @return bool|string
      */
-    public static function getImageUrl($basePath, $baseDir, $img, $size=500, $expansion='.png')
+    public static function getImageUrl($basePath, $baseDir, $img, $size = 500, $expansion = '.png')
     {
-        $image = $baseDir.'/'.$img.'_'.$size.'x'.$size.$expansion;
-        $image_path = Yii::getAlias($basePath).'/'.$img.'_'.$size.'x'.$size.$expansion;
-        if(file_exists($image_path)) {
+        $image = $baseDir . '/' . $img . '_' . $size . 'x' . $size . $expansion;
+        $image_path = Yii::getAlias($basePath) . '/' . $img . '_' . $size . 'x' . $size . $expansion;
+        if (file_exists($image_path)) {
             return $image;
         } else {
-            $file = $basePath.'/'.$img.$expansion;
-            if(!file_exists($file)) {
+            $file = $basePath . '/' . $img . $expansion;
+            if (!file_exists($file)) {
                 return false;
             }
             $image = new ImageDriver(['driver' => 'GD']);
             $image = $image->load($file);
-            $image->resize($size,$size);
-            $image->save($basePath.'/'.$img.'_'.$size.'x'.$size.$expansion, 100);
-            return $baseDir.'/'.$img.'_'.$size.'x'.$size.$expansion;
+            $image->resize($size, $size);
+            $image->save($basePath . '/' . $img . '_' . $size . 'x' . $size . $expansion, 100);
+            return $baseDir . '/' . $img . '_' . $size . 'x' . $size . $expansion;
         }
     }
-
 }
