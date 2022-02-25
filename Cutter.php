@@ -10,7 +10,7 @@ use yii\bootstrap5\ButtonGroup;
 
 /**
  * Class Cutter
- * @package mitrm\cutter\widgets
+ * @package calcio\cutter\widgets
  */
 class Cutter extends \yii\widgets\InputWidget
 {
@@ -55,7 +55,7 @@ class Cutter extends \yii\widgets\InputWidget
     {
         if (is_null($this->imageOptions)) {
             $this->imageOptions = [
-                'class' => 'img-responsive',
+                'class' => 'img-fluid',
             ];
         }
 
@@ -73,7 +73,7 @@ class Cutter extends \yii\widgets\InputWidget
 
         echo Html::beginTag('div', ['class' => 'preview-container']);
         echo Html::img($this->model->{$this->attribute} ? $this->model->getImg(500, $this->attribute) : null, [
-            'class' => 'preview-image img-responsive',
+            'class' => 'preview-image img-fluid',
         ]);
         echo Html::endTag('div');
         echo Html::endTag('div');
@@ -166,7 +166,7 @@ class Cutter extends \yii\widgets\InputWidget
                 'encodeLabels' => false,
                 'buttons' => [
                     [
-                        'label' => '<i class="glyphicon glyphicon-move"></i>',
+                        'label' => '<i class="fa fa-arrows-alt"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'setDragMode',
@@ -176,7 +176,7 @@ class Cutter extends \yii\widgets\InputWidget
                         ]
                     ],
                     [
-                        'label' => '<i class="glyphicon glyphicon-scissors"></i>',
+                        'label' => '<i class="fa fa-scissors"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'setDragMode',
@@ -194,7 +194,7 @@ class Cutter extends \yii\widgets\InputWidget
                 'encodeLabels' => false,
                 'buttons' => [
                     [
-                        'label' => '<i class="glyphicon glyphicon-ok"></i>',
+                        'label' => '<i class="fa fa-check"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'crop',
@@ -203,7 +203,7 @@ class Cutter extends \yii\widgets\InputWidget
                         ]
                     ],
                     [
-                        'label' => '<i class="glyphicon glyphicon-refresh"></i>',
+                        'label' => '<i class="fa fa-refresh"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'reset',
@@ -212,7 +212,7 @@ class Cutter extends \yii\widgets\InputWidget
                         ]
                     ],
                     [
-                        'label' => '<i class="glyphicon glyphicon-remove"></i>',
+                        'label' => '<i class="fa fa-remove"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'clear',
@@ -229,7 +229,7 @@ class Cutter extends \yii\widgets\InputWidget
                 'encodeLabels' => false,
                 'buttons' => [
                     [
-                        'label' => '<i class="glyphicon glyphicon-zoom-in"></i>',
+                        'label' => '<i class="fa fa-search-plus"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'zoom',
@@ -240,7 +240,7 @@ class Cutter extends \yii\widgets\InputWidget
                         'visible' => $this->cropperOptions['zoomable']
                     ],
                     [
-                        'label' => '<i class="glyphicon glyphicon-zoom-out"></i>',
+                        'label' => '<i class="fa fa-search-minus"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'zoom',
@@ -251,7 +251,7 @@ class Cutter extends \yii\widgets\InputWidget
                         'visible' => $this->cropperOptions['zoomable']
                     ],
                     [
-                        'label' => '<i class="glyphicon glyphicon-share-alt  icon-flipped"></i>',
+                        'label' => '<i class="fa fa-share-alt  icon-flipped"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'rotate',
@@ -262,7 +262,7 @@ class Cutter extends \yii\widgets\InputWidget
                         'visible' => $this->cropperOptions['rotatable']
                     ],
                     [
-                        'label' => '<i class="glyphicon glyphicon-share-alt"></i>',
+                        'label' => '<i class="fa fa-share-alt"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'rotate',
@@ -281,7 +281,7 @@ class Cutter extends \yii\widgets\InputWidget
                 'encodeLabels' => false,
                 'buttons' => [
                     [
-                        'label' => '<i class="glyphicon glyphicon-glyphicon glyphicon-resize-full"></i>',
+                        'label' => '<i class="fa fa-expand"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'setAspectRatio',
@@ -291,7 +291,7 @@ class Cutter extends \yii\widgets\InputWidget
                         ]
                     ],
                     [
-                        'label' => '<i class="glyphicon glyphicon-upload"></i>',
+                        'label' => '<i class="fa fa-upload"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'setData',
