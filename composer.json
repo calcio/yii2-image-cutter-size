@@ -1,6 +1,6 @@
 {
   "name": "calcio/yii2-image-cutter",
-  "description": "Yii2 crop image widget",
+  "description": "Yii2 crop image widget with Bootstrap 5",
   "version": "1.0.0",
   "type": "yii2-extension",
   "keywords": [
@@ -19,7 +19,7 @@
     }
   ],
   "require": {
-    "php": ">=7.4.0",
+    "php": ">=7.4",
     "yiisoft/yii2": "*",
     "yiisoft/yii2-imagine": "*",
     "yurkinx/yii2-image": "*"
