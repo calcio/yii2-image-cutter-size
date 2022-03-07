@@ -48,14 +48,6 @@ class Cutter extends \yii\widgets\InputWidget
 
         $this->registerTranslations();
 
-        //Initializating configurations
-        $this->cropperOptions['aspectRatio'] = false;
-        $this->cropperOptions['angle'] = false;
-        $this->cropperOptions['dataX'] = false;
-        $this->cropperOptions['dataY'] = false;
-        $this->cropperOptions['dataWidth'] = false;
-        $this->cropperOptions['dataHeight'] = false;
-
         $this->cropperOptions = array_merge($this->cropperOptions, $this->defaultCropperOptions);
     }
 
@@ -103,61 +95,35 @@ class Cutter extends \yii\widgets\InputWidget
         echo Html::tag('br');
 
         echo Html::beginTag('div', ['class' => 'row']);
+        echo Html::beginTag('div', ['class' => 'col-md-2']);
+        echo Html::label(Yii::t('calcio/cutter/cutter', 'ASPECT_RATIO'), $inputField . '-aspectRatio');
+        echo Html::textInput($this->attribute . '-aspectRatio', isset($this->cropperOptions['aspectRatio']) ? $this->cropperOptions['aspectRatio'] : 0, ['id' => $inputField . '-aspectRatio', 'class' => 'form-control']);
+        echo Html::endTag('div');
 
-        if ($this->cropperOptions['aspectRatio'] !== false) :
-            echo Html::beginTag('div', ['class' => 'col-md-2']);
-            echo Html::label(Yii::t('calcio/cutter/cutter', 'ASPECT_RATIO'), $inputField . '-aspectRatio');
-            echo Html::textInput($this->attribute . '-aspectRatio', isset($this->cropperOptions['aspectRatio']) ? $this->cropperOptions['aspectRatio'] : 0, ['id' => $inputField . '-aspectRatio', 'class' => 'form-control']);
-            echo Html::endTag('div');
-        else :
-            echo Html::hiddenInput($this->attribute . '-aspectRatio', isset($this->cropperOptions['aspectRatio']) ? $this->cropperOptions['aspectRatio'] : 0, ['id' => $inputField . '-aspectRatio', 'class' => 'form-control']);
-        endif;
+        echo Html::beginTag('div', ['class' => 'col-md-2']);
+        echo Html::label(Yii::t('calcio/cutter/cutter', 'ANGLE'), $inputField . '-dataRotate');
+        echo Html::textInput($this->attribute . '-cropping[dataRotate]', '', ['id' => $inputField . '-dataRotate', 'class' => 'form-control']);
+        echo Html::endTag('div');
 
-        if ($this->cropperOptions['angle'] !== false) :
-            echo Html::beginTag('div', ['class' => 'col-md-2']);
-            echo Html::label(Yii::t('calcio/cutter/cutter', 'ANGLE'), $inputField . '-dataRotate');
-            echo Html::textInput($this->attribute . '-cropping[dataRotate]', '', ['id' => $inputField . '-dataRotate', 'class' => 'form-control']);
-            echo Html::endTag('div');
-        else :
-            echo Html::hiddenInput($this->attribute . '-cropping[dataRotate]', '', ['id' => $inputField . '-dataRotate', 'class' => 'form-control']);
-        endif;
+        echo Html::beginTag('div', ['class' => 'col-md-2']);
+        echo Html::label(Yii::t('calcio/cutter/cutter', 'POSITION') . ' (X)', $inputField . '-dataX');
+        echo Html::textInput($this->attribute . '-cropping[dataX]', '', ['id' => $inputField . '-dataX', 'class' => 'form-control']);
+        echo Html::endTag('div');
 
-        if ($this->cropperOptions['dataX'] !== false) :
-            echo Html::beginTag('div', ['class' => 'col-md-2']);
-            echo Html::label(Yii::t('calcio/cutter/cutter', 'POSITION') . ' (X)', $inputField . '-dataX');
-            echo Html::textInput($this->attribute . '-cropping[dataX]', '', ['id' => $inputField . '-dataX', 'class' => 'form-control']);
-            echo Html::endTag('div');
-        else :
-            echo Html::hiddenInput($this->attribute . '-cropping[dataX]', '', ['id' => $inputField . '-dataX', 'class' => 'form-control']);
-        endif;
+        echo Html::beginTag('div', ['class' => 'col-md-2']);
+        echo Html::label(Yii::t('calcio/cutter/cutter', 'POSITION') . ' (Y)', $inputField . '-dataY');
+        echo Html::textInput($this->attribute . '-cropping[dataY]', '', ['id' => $inputField . '-dataY', 'class' => 'form-control']);
+        echo Html::endTag('div');
 
-        if ($this->cropperOptions['dataY'] !== false) :
-            echo Html::beginTag('div', ['class' => 'col-md-2']);
-            echo Html::label(Yii::t('calcio/cutter/cutter', 'POSITION') . ' (Y)', $inputField . '-dataY');
-            echo Html::textInput($this->attribute . '-cropping[dataY]', '', ['id' => $inputField . '-dataY', 'class' => 'form-control']);
-            echo Html::endTag('div');
-        else :
-            echo Html::hiddenInput($this->attribute . '-cropping[dataY]', '', ['id' => $inputField . '-dataY', 'class' => 'form-control']);
-        endif;
+        echo Html::beginTag('div', ['class' => 'col-md-2']);
+        echo Html::label(Yii::t('calcio/cutter/cutter', 'WIDTH'), $inputField . '-dataWidth');
+        echo Html::textInput($this->attribute . '-cropping[dataWidth]', '', ['id' => $inputField . '-dataWidth', 'class' => 'form-control']);
+        echo Html::endTag('div');
 
-        if ($this->cropperOptions['dataWidth'] !== false) :
-            echo Html::beginTag('div', ['class' => 'col-md-2']);
-            echo Html::label(Yii::t('calcio/cutter/cutter', 'WIDTH'), $inputField . '-dataWidth');
-            echo Html::textInput($this->attribute . '-cropping[dataWidth]', '', ['id' => $inputField . '-dataWidth', 'class' => 'form-control']);
-            echo Html::endTag('div');
-        else :
-            echo Html::hiddenInput($this->attribute . '-cropping[dataWidth]', '', ['id' => $inputField . '-dataWidth', 'class' => 'form-control']);
-        endif;
-
-        if ($this->cropperOptions['dataHeight'] !== false) :
-            echo Html::beginTag('div', ['class' => 'col-md-2']);
-            echo Html::label(Yii::t('calcio/cutter/cutter', 'HEIGHT'), $inputField . '-dataHeight');
-            echo Html::textInput($this->attribute . '-cropping[dataHeight]', '', ['id' => $inputField . '-dataHeight', 'class' => 'form-control']);
-            echo Html::endTag('div');
-        else :
-            echo Html::hiddenInput($this->attribute . '-cropping[dataHeight]', '', ['id' => $inputField . '-dataHeight', 'class' => 'form-control']);
-        endif;
-
+        echo Html::beginTag('div', ['class' => 'col-md-2']);
+        echo Html::label(Yii::t('calcio/cutter/cutter', 'HEIGHT'), $inputField . '-dataHeight');
+        echo Html::textInput($this->attribute . '-cropping[dataHeight]', '', ['id' => $inputField . '-dataHeight', 'class' => 'form-control']);
+        echo Html::endTag('div');
         echo Html::endTag('div');
 
         Modal::end();
@@ -200,6 +166,69 @@ class Cutter extends \yii\widgets\InputWidget
                 'encodeLabels' => false,
                 'buttons' => [
                     [
+                        'label' => '<i class="fa fa-arrows-alt"></i>',
+                        'options' => [
+                            'type' => 'button',
+                            'data-method' => 'setDragMode',
+                            'data-option' => 'move',
+                            'class' => 'btn btn-primary',
+                            'title' => Yii::t('calcio/cutter/cutter', 'DRAG_MODE_MOVE'),
+                        ]
+                    ],
+                    [
+                        'label' => '<i class="fa fa-scissors"></i>',
+                        'options' => [
+                            'type' => 'button',
+                            'data-method' => 'setDragMode',
+                            'data-option' => 'crop',
+                            'class' => 'btn btn-primary',
+                            'data-title' => Yii::t('calcio/cutter/cutter', 'DRAG_MODE_CROP'),
+                        ]
+                    ],
+                ],
+                'options' => [
+                    'class' => 'pull-left'
+                ]
+            ]) .
+            ButtonGroup::widget([
+                'encodeLabels' => false,
+                'buttons' => [
+                    [
+                        'label' => '<i class="fa fa-check"></i>',
+                        'options' => [
+                            'type' => 'button',
+                            'data-method' => 'crop',
+                            'class' => 'btn btn-primary',
+                            'data-title' => Yii::t('calcio/cutter/cutter', 'CROP'),
+                        ]
+                    ],
+                    [
+                        'label' => '<i class="fa fa-refresh"></i>',
+                        'options' => [
+                            'type' => 'button',
+                            'data-method' => 'reset',
+                            'class' => 'btn btn-primary',
+                            'title' => Yii::t('calcio/cutter/cutter', 'REFRESH'),
+                        ]
+                    ],
+                    [
+                        'label' => '<i class="fa fa-remove"></i>',
+                        'options' => [
+                            'type' => 'button',
+                            'data-method' => 'clear',
+                            'class' => 'btn btn-primary',
+                            'title' => Yii::t('calcio/cutter/cutter', 'REMOVE'),
+                        ]
+                    ],
+                ],
+                'options' => [
+                    'class' => 'pull-left'
+                ]
+            ]) .
+            ButtonGroup::widget([
+                'encodeLabels' => false,
+                'buttons' => [
+                    [
                         'label' => '<i class="fa fa-search-plus"></i>',
                         'options' => [
                             'type' => 'button',
@@ -222,7 +251,7 @@ class Cutter extends \yii\widgets\InputWidget
                         'visible' => $this->cropperOptions['zoomable']
                     ],
                     [
-                        'label' => '<i class="fa fa-undo"></i>',
+                        'label' => '<i class="fa fa-share-alt  icon-flipped"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'rotate',
@@ -233,7 +262,7 @@ class Cutter extends \yii\widgets\InputWidget
                         'visible' => $this->cropperOptions['rotatable']
                     ],
                     [
-                        'label' => '<i class="fa fa-repeat"></i>',
+                        'label' => '<i class="fa fa-share-alt"></i>',
                         'options' => [
                             'type' => 'button',
                             'data-method' => 'rotate',
@@ -242,6 +271,33 @@ class Cutter extends \yii\widgets\InputWidget
                             'title' => Yii::t('calcio/cutter/cutter', 'ROTATE_RIGHT'),
                         ],
                         'visible' => $this->cropperOptions['rotatable']
+                    ],
+                ],
+                'options' => [
+                    'class' => 'pull-left'
+                ]
+            ]) .
+            ButtonGroup::widget([
+                'encodeLabels' => false,
+                'buttons' => [
+                    [
+                        'label' => '<i class="fa fa-expand"></i>',
+                        'options' => [
+                            'type' => 'button',
+                            'data-method' => 'setAspectRatio',
+                            'data-target' => '#' . $inputField . '-aspectRatio',
+                            'class' => 'btn btn-primary',
+                            'title' => Yii::t('calcio/cutter/cutter', 'SET_ASPECT_RATIO'),
+                        ]
+                    ],
+                    [
+                        'label' => '<i class="fa fa-upload"></i>',
+                        'options' => [
+                            'type' => 'button',
+                            'data-method' => 'setData',
+                            'class' => 'btn btn-primary',
+                            'title' => Yii::t('calcio/cutter/cutter', 'SET_DATA'),
+                        ]
                     ],
                 ],
                 'options' => [
