@@ -78,9 +78,13 @@ class Cutter extends \yii\widgets\InputWidget
         ]);
 
         echo Html::beginTag('div', ['class' => 'preview-container']);
+
+
+        echo Html::beginTag('div', ['class' => 'box-preview-image']);
         echo Html::img($this->model->{$this->attribute} ? $this->model->getImg(500, $this->attribute) : null, [
             'class' => 'preview-image img-fluid',
         ]);
+        echo Html::endTag('div');
 
         if (isset($this->cropperOptions['label'])) :
             echo Html::tag('label', $this->cropperOptions['label'], ['class' => 'mb-2']);
