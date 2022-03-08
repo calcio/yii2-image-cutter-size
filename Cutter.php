@@ -40,6 +40,13 @@ class Cutter extends \yii\widgets\InputWidget
         'rotatable' => true,
         'zoomable' => true,
         'movable' => true,
+        'displayRatio' => false,
+        'displayAngle' => false,
+        'displayDataX' => false,
+        'displayDataY' => false,
+        'displayDataWidth' => false,
+        'displayDataHeight' => false,
+        'displayRemoveOptionField' => false,
     ];
 
     public function init()
@@ -47,14 +54,6 @@ class Cutter extends \yii\widgets\InputWidget
         parent::init();
 
         $this->registerTranslations();
-
-        //Initializating configurations
-        $this->cropperOptions['aspectRatio'] = false;
-        $this->cropperOptions['angle'] = false;
-        $this->cropperOptions['dataX'] = false;
-        $this->cropperOptions['dataY'] = false;
-        $this->cropperOptions['dataWidth'] = false;
-        $this->cropperOptions['dataHeight'] = false;
 
         $this->cropperOptions = array_merge($this->cropperOptions, $this->defaultCropperOptions);
     }
@@ -72,7 +71,6 @@ class Cutter extends \yii\widgets\InputWidget
         $inputField = Html::getInputId($this->model, $this->attribute);
 
         echo Html::beginTag('div', ['id' => $inputField . '-cutter']);
-        echo Html::activeFileInput($this->model, $this->attribute);
 
         echo Html::beginTag('div', [
             'class' => 'preview-pane',
@@ -83,12 +81,21 @@ class Cutter extends \yii\widgets\InputWidget
         echo Html::img($this->model->{$this->attribute} ? $this->model->getImg(500, $this->attribute) : null, [
             'class' => 'preview-image img-fluid',
         ]);
+
+        if (isset($this->cropperOptions['label'])) :
+            echo Html::tag('label', $this->cropperOptions['label'], ['class' => 'mb-2']);
+        endif;
+
+        echo Html::activeFileInput($this->model, $this->attribute);
+
         echo Html::endTag('div');
         echo Html::endTag('div');
 
-        echo Html::checkbox($this->attribute . '-remove', false, [
-            'label' => Yii::t('calcio/cutter/cutter', 'REMOVE')
-        ]);
+        if ($this->cropperOptions['displayRemoveOptionField'] == true) :
+            echo Html::checkbox($this->attribute . '-remove', false, [
+                'label' => Yii::t('calcio/cutter/cutter', 'REMOVE')
+            ]);
+        endif;
 
         Modal::begin([
             'closeButton' => [],
@@ -104,7 +111,7 @@ class Cutter extends \yii\widgets\InputWidget
 
         echo Html::beginTag('div', ['class' => 'row']);
 
-        if ($this->cropperOptions['aspectRatio'] !== false) :
+        if ($this->cropperOptions['displayRatio'] !== false) :
             echo Html::beginTag('div', ['class' => 'col-md-2']);
             echo Html::label(Yii::t('calcio/cutter/cutter', 'ASPECT_RATIO'), $inputField . '-aspectRatio');
             echo Html::textInput($this->attribute . '-aspectRatio', isset($this->cropperOptions['aspectRatio']) ? $this->cropperOptions['aspectRatio'] : 0, ['id' => $inputField . '-aspectRatio', 'class' => 'form-control']);
@@ -113,7 +120,7 @@ class Cutter extends \yii\widgets\InputWidget
             echo Html::hiddenInput($this->attribute . '-aspectRatio', isset($this->cropperOptions['aspectRatio']) ? $this->cropperOptions['aspectRatio'] : 0, ['id' => $inputField . '-aspectRatio', 'class' => 'form-control']);
         endif;
 
-        if ($this->cropperOptions['angle'] !== false) :
+        if ($this->cropperOptions['displayAngle'] !== false) :
             echo Html::beginTag('div', ['class' => 'col-md-2']);
             echo Html::label(Yii::t('calcio/cutter/cutter', 'ANGLE'), $inputField . '-dataRotate');
             echo Html::textInput($this->attribute . '-cropping[dataRotate]', '', ['id' => $inputField . '-dataRotate', 'class' => 'form-control']);
@@ -122,7 +129,7 @@ class Cutter extends \yii\widgets\InputWidget
             echo Html::hiddenInput($this->attribute . '-cropping[dataRotate]', '', ['id' => $inputField . '-dataRotate', 'class' => 'form-control']);
         endif;
 
-        if ($this->cropperOptions['dataX'] !== false) :
+        if ($this->cropperOptions['displayDataX'] !== false) :
             echo Html::beginTag('div', ['class' => 'col-md-2']);
             echo Html::label(Yii::t('calcio/cutter/cutter', 'POSITION') . ' (X)', $inputField . '-dataX');
             echo Html::textInput($this->attribute . '-cropping[dataX]', '', ['id' => $inputField . '-dataX', 'class' => 'form-control']);
@@ -131,7 +138,7 @@ class Cutter extends \yii\widgets\InputWidget
             echo Html::hiddenInput($this->attribute . '-cropping[dataX]', '', ['id' => $inputField . '-dataX', 'class' => 'form-control']);
         endif;
 
-        if ($this->cropperOptions['dataY'] !== false) :
+        if ($this->cropperOptions['displayDataY'] !== false) :
             echo Html::beginTag('div', ['class' => 'col-md-2']);
             echo Html::label(Yii::t('calcio/cutter/cutter', 'POSITION') . ' (Y)', $inputField . '-dataY');
             echo Html::textInput($this->attribute . '-cropping[dataY]', '', ['id' => $inputField . '-dataY', 'class' => 'form-control']);
@@ -140,7 +147,7 @@ class Cutter extends \yii\widgets\InputWidget
             echo Html::hiddenInput($this->attribute . '-cropping[dataY]', '', ['id' => $inputField . '-dataY', 'class' => 'form-control']);
         endif;
 
-        if ($this->cropperOptions['dataWidth'] !== false) :
+        if ($this->cropperOptions['displayDataWidth'] !== false) :
             echo Html::beginTag('div', ['class' => 'col-md-2']);
             echo Html::label(Yii::t('calcio/cutter/cutter', 'WIDTH'), $inputField . '-dataWidth');
             echo Html::textInput($this->attribute . '-cropping[dataWidth]', '', ['id' => $inputField . '-dataWidth', 'class' => 'form-control']);
@@ -149,7 +156,7 @@ class Cutter extends \yii\widgets\InputWidget
             echo Html::hiddenInput($this->attribute . '-cropping[dataWidth]', '', ['id' => $inputField . '-dataWidth', 'class' => 'form-control']);
         endif;
 
-        if ($this->cropperOptions['dataHeight'] !== false) :
+        if ($this->cropperOptions['displayDataHeight'] !== false) :
             echo Html::beginTag('div', ['class' => 'col-md-2']);
             echo Html::label(Yii::t('calcio/cutter/cutter', 'HEIGHT'), $inputField . '-dataHeight');
             echo Html::textInput($this->attribute . '-cropping[dataHeight]', '', ['id' => $inputField . '-dataHeight', 'class' => 'form-control']);
@@ -256,3 +263,4 @@ class Cutter extends \yii\widgets\InputWidget
             ]);
     }
 }
+
